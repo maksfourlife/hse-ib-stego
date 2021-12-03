@@ -19,7 +19,7 @@ def inject(image: np.ndarray, msg: np.ndarray) -> np.ndarray:
     return image
 
 
-def eject(ctr: np.ndarray, msg_length) -> np.ndarray:
+def eject(ctr: np.ndarray, msg_length: int) -> np.ndarray:
     ctr = ctr.reshape((-1,))
     msg = np.zeros((msg_length,), dtype=np.uint8)
 
