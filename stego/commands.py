@@ -17,20 +17,21 @@ from stego.transform import inject, eject
 def inject_command(
     image_path: str,
     cnt_path: str,
-    text: str = None,
-    file_path: str = None,
-    bits: str = None):
+    _input: str,
+    input_type: str):
     
     assert image_path.endswith(".png"), "Image is not png"
 
     msg = np.array([])
-    
-    if text is not None:
-        msg = text_to_msg(text)
-    elif file_path is not None:
-        msg = read_file_to_msg(file_path)
-    elif bits is not None:
-        msg = bits_to_msg(bits)
+
+    if input_type == "text":
+        msg = text_to_msg(_input)
+    elif input_type == "file":
+        msg = read_file_to_msg(_input)
+    elif input_type == "bits":
+        msg = bits_to_msg(_input)
+
+    print("MSGLEN:", msg.size)
     
     image = np.array(Image.open(image_path))
     cnt = inject(image, msg)
@@ -51,7 +52,6 @@ def eject_command(
     assert cnt_path.endswith(".png"), "Image is not png"
 
     cnt = np.array(Image.open(cnt_path))
-
     msg = eject(cnt, message_length)
 
     if message_type == "text":

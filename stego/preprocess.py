@@ -15,7 +15,7 @@ def bits_to_msg(bits: str) -> np.ndarray:
 
 
 def text_from_msg(msg: np.ndarray) -> str:
-    return "".join(msg)
+    return msg.tostring().decode()
 
 
 def bits_from_msg(msg: np.ndarray) -> str:
