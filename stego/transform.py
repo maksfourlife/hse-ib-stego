@@ -1,4 +1,5 @@
 import numpy as np
+from tqdm import trange
 
 
 def inject(image: np.ndarray, msg: np.ndarray) -> np.ndarray:
@@ -6,7 +7,7 @@ def inject(image: np.ndarray, msg: np.ndarray) -> np.ndarray:
     image = image.copy().reshape((-1,))
 
     image_mask = 1
-    for i in range(msg.size):
+    for i in trange(msg.size, desc="injection"):
         for j in range(8):
             k = (i * 8 + j) % image.size
 
@@ -24,7 +25,7 @@ def eject(ctr: np.ndarray, msg_length: int) -> np.ndarray:
     msg = np.zeros((msg_length,), dtype=np.uint8)
 
     ctr_mask = 1
-    for i in range(msg.size):
+    for i in trange(msg.size, desc="ejection"):
         for j in range(8):
             k = (i * 8 + j) % ctr.size
 
