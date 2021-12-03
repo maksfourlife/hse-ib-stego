@@ -3,7 +3,7 @@ import numpy as np
 
 def inject(image: np.ndarray, msg: np.ndarray) -> np.ndarray:
     shape = image.shape
-    image = image.reshape((-1,))
+    image = image.copy().reshape((-1,))
 
     image_mask = 1
     for i in range(msg.size):

@@ -2,6 +2,9 @@ from argparse import ArgumentParser
 
 from stego.commands import eject_command, inject_command
 
+import warnings
+warnings.filterwarnings("ignore")
+
 
 parser = ArgumentParser(
     prog="Stego",
